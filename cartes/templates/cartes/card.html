@@ -32,6 +32,16 @@
             transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
+        .card.fade-out {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .card.fade-in {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
         .card h1 {
             color: #ffffff;
             font-size: 1.5rem;
@@ -66,16 +76,6 @@
         .download-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
-        }
-
-        .fade-out {
-            transform: scale(0.9);
-            opacity: 0;
-        }
-
-        .fade-in {
-            transform: scale(1.1);
-            opacity: 1;
         }
 
         .background-decorations {
@@ -285,7 +285,7 @@
             const downloadButton = document.querySelector(".download-button");
 
             function randomDecorations() {
-                decorations.innerHTML = ""; // Réinitialiser les décorations
+                decorations.innerHTML = "";
                 const types = ["star", "firefly", "bulb"];
                 const count = Math.floor(Math.random() * 10) + 5;
 
@@ -305,9 +305,9 @@
 
                 cardContainer.classList.add("fade-out");
                 setTimeout(() => {
+                    cardContainer.style.background = randomCard.background;
                     cardTitle.innerText = randomCard.title;
                     cardText.innerText = randomCard.text;
-                    cardContainer.style.background = randomCard.background;
                     randomDecorations();
                     cardContainer.classList.remove("fade-out");
                     cardContainer.classList.add("fade-in");
@@ -318,13 +318,22 @@
             updateCard();
 
             downloadButton.addEventListener("click", function () {
-                downloadButton.classList.add("hide-on-download");
-                html2canvas(cardContainer).then(canvas => {
+                downloadButton.style.display = "none";
+
+                html2canvas(cardContainer, {
+                    backgroundColor: null,
+                    scale: 2,
+                    onclone: function (clonedDoc) {
+                        const clonedDecorations = clonedDoc.getElementById("decorations");
+                        clonedDecorations.innerHTML = decorations.innerHTML;
+                    }
+                }).then(canvas => {
                     const link = document.createElement("a");
                     link.download = "carte_noel.png";
                     link.href = canvas.toDataURL("image/png");
                     link.click();
-                    downloadButton.classList.remove("hide-on-download");
+
+                    downloadButton.style.display = "inline-flex";
                 });
             });
         });

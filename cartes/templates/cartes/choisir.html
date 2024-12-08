@@ -101,8 +101,8 @@
         .card-options li {
             position: relative;
             background: rgba(255, 255, 255, 0.1);
-            width: 250px;
-            height: 200px;
+            width: 200px; /* Réduit la largeur */
+            height: 160px; /* Réduit la hauteur */
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -111,7 +111,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 15px;
+            gap: 10px; /* Ajusté pour s'adapter à la taille */
         }
 
         .card-options li:hover {
@@ -148,12 +148,12 @@
             }
 
             .card-options li {
-                width: 80%;
+                width: 70%; /* Réduit la largeur sur mobile */
             }
 
             .card-options li a {
-                font-size: 0.9em;
-                padding: 8px 15px;
+                font-size: 0.8em; /* Réduit la taille du texte */
+                padding: 8px 15px; /* Réduit le bouton */
             }
         }
     </style>
