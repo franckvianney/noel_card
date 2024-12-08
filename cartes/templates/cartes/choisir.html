@@ -35,10 +35,10 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: #fff;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
-            position: relative;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -65,18 +65,17 @@
         }
 
         header {
-            position: absolute;
-            top: 5%;
+            position: relative;
+            margin-top: 20px;
             width: 100%;
             text-align: center;
         }
 
         header h1 {
-            font-family: 'Mountains of Christmas', cursive; /* Utilisation de la police festive */
+            font-family: 'Mountains of Christmas', cursive;
             font-size: 3em;
             color: #FFD700;
-            text-shadow: 2px 2px 4px #8B0000; /* Ombre pour l'effet de profondeur */
-            margin: 0;
+            text-shadow: 2px 2px 4px #8B0000;
             animation: glow 2s ease-in-out infinite alternate;
         }
 
@@ -95,7 +94,9 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            padding: 0;
+            padding: 20px;
+            margin: 0;
+            flex-wrap: wrap;
         }
 
         .card-options li {
@@ -145,6 +146,17 @@
             transform: scale(1.1);
         }
 
+        footer {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
         @media screen and (max-width: 768px) {
             .card-options {
                 flex-direction: column;
@@ -152,6 +164,15 @@
 
             .card-options li {
                 width: 90%;
+                height: auto;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            footer {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -184,6 +205,10 @@
             <a href="{% url 'family_loading' %}">Voir le cadeau</a>
         </li>
     </ul>
+
+    <!-- Footer -->
+    {% include 'cartes/common/footer.html' %}
+
     <script>
         // Création des flocons de neige
         function createSnow() {
@@ -203,6 +228,5 @@
         window.onload = createSnow;
     </script>
 </body>
-{% include 'cartes/common/footer.html' %}
 
 </html>
