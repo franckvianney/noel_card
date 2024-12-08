@@ -35,10 +35,10 @@
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: #fff;
-            min-height: 100vh;
+            height: 100vh;
             overflow: hidden;
+            position: relative;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -65,8 +65,8 @@
         }
 
         header {
-            position: relative;
-            margin-top: 20px;
+            position: absolute;
+            top: 5%;
             width: 100%;
             text-align: center;
         }
@@ -76,6 +76,7 @@
             font-size: 3em;
             color: #FFD700;
             text-shadow: 2px 2px 4px #8B0000;
+            margin: 0;
             animation: glow 2s ease-in-out infinite alternate;
         }
 
@@ -94,33 +95,28 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            padding: 20px;
-            margin: 0;
-            flex-wrap: wrap;
+            padding: 0;
         }
 
         .card-options li {
             position: relative;
             background: rgba(255, 255, 255, 0.1);
             width: 250px;
-            height: 320px;
+            height: 200px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
         }
 
         .card-options li:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .card-options li h1 {
-            font-size: 6em;
-            margin: 20px 0 10px;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px #8B0000;
         }
 
         .card-options li span {
@@ -133,7 +129,6 @@
             background: linear-gradient(45deg, #FF4500, #FFD700);
             color: white;
             padding: 10px 20px;
-            margin-top: 20px;
             text-decoration: none;
             border-radius: 25px;
             font-size: 1em;
@@ -146,33 +141,19 @@
             transform: scale(1.1);
         }
 
-        footer {
-            margin-top: 20px;
-            width: 100%;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 0.9em;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
-
         @media screen and (max-width: 768px) {
             .card-options {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .card-options li {
-                width: 90%;
-                height: auto;
+                width: 80%;
             }
 
-            header h1 {
-                font-size: 2em;
-            }
-
-            footer {
-                font-size: 0.8em;
+            .card-options li a {
+                font-size: 0.9em;
+                padding: 8px 15px;
             }
         }
     </style>
@@ -190,25 +171,18 @@
     <!-- Options -->
     <ul class="card-options">
         <li>
-            <h1>1</h1>
             <span>Une carte pour moi</span>
             <a href="{% url 'welcome' %}">Voir le cadeau</a>
         </li>
         <li>
-            <h1>2</h1>
             <span>Une carte pour mes amis</span>
             <a href="{% url 'friends_loading' %}">Voir le cadeau</a>
         </li>
         <li>
-            <h1>3</h1>
             <span>Une carte pour ma famille</span>
             <a href="{% url 'family_loading' %}">Voir le cadeau</a>
         </li>
     </ul>
-
-    <!-- Footer -->
-    {% include 'cartes/common/footer.html' %}
-
     <script>
         // Création des flocons de neige
         function createSnow() {
@@ -228,5 +202,6 @@
         window.onload = createSnow;
     </script>
 </body>
+{% include 'cartes/common/footer.html' %}
 
 </html>
