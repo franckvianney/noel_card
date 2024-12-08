@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ty0lj8by3sjg=ww4#avv86zllkz(tk1e$e_*(b6^xu*d6dl2t%'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [noel_card.herokuapp.com]
-
+ALLOWED_HOSTS = [config('ALLOWED_HOSTS', default='noel-card.herokuapp.com')]
 
 # Application definition
 
@@ -79,10 +80,7 @@ WSGI_APPLICATION = 'noel_nouvelan.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
 
@@ -120,9 +118,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 STATICFILES_DIRS = ["noel_nouvelan/static"]
   # Si vos fichiers statiques sont dans un dossier "static"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Default primary key field type
@@ -139,3 +139,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Lecture depuis .env
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Lecture depuis .env
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Active les paramètres pour Heroku
+django_heroku.settings(locals())
+
+
+DEBUG = config('DEBUG', default=False, cast=bool)
