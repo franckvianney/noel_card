@@ -160,6 +160,7 @@
         <p>Vivez une expérience féerique et plongez dans l'esprit festif. 🎄✨</p>
         <a href="{% url 'choisir' %}" class="cta-btn">⭐ Découvrez la Magie ⭐</a>
     </div>
+    {% include 'cartes/common/footer.html' %}
     <script>
         // Création des flocons de neige uniquement en haut
         function createSnow() {
@@ -180,6 +181,6 @@
         };
     </script>
 </body>
-{% include 'cartes/common/footer.html' %}
+
 
 </html>

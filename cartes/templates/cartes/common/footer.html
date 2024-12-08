@@ -1,82 +1,89 @@
-<footer>
-    <div class="footer-container">
-        <ul>
+<footer class="unique-footer">
+    <div class="unique-footer-container">
+        <ul class="unique-footer-links">
             <li><a href="{% url 'index' %}">Accueil</a></li>
             <li><a href="{% url 'mentions_legales' %}">Mentions légales</a></li>
             <li><a href="{% url 'privacy_policy' %}">Politique de confidentialité</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <!-- Liens des réseaux sociaux -->
-        <div class="social-links">
+        <div class="unique-social-links">
             <a href="https://x.com/Mr_Vianss_" target="_blank" aria-label="Twitter">Twitter</a>
             <a href="https://www.facebook.com/vianney.franckdiomande" target="_blank" aria-label="Facebook">Facebook</a>
             <a href="https://github.com/franckvianney" target="_blank" aria-label="GitHub">GitHub</a>
-            <a href="https://www.linkedin.com/in/franck-vianney-diomande-864b8193/" target="_blank" aria-label="GitHub">Linkedin</a>
+            <a href="https://www.linkedin.com/in/franck-vianney-diomande-864b8193/" target="_blank" aria-label="LinkedIn">LinkedIn</a>
         </div>
-        <p>&copy; 2024 - Tous droits réservés.</p>
+        <p class="unique-footer-text">&copy; 2024 - Tous droits réservés.</p>
     </div>
 </footer>
 <style>
-    footer {
-        background-color: #EC1414FF; /* Couleur de fond */
-        color: #ffffff; /* Couleur du texte */
-        text-align: center; /* Centrer le contenu */
-        padding: 0px 0; /* Réduit l'espacement (hauteur du footer) */
-        font-size: 0.7em; /* Réduit la taille du texte général */
-        position: absolute; /* Position absolue */
-        bottom: 0; /* Aligné en bas */
-        width: 100%; /* S'étend sur toute la largeur */
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour plus de style */
-    }
+    /* Footer général */
+        .unique-footer {
+            background-color: #EC1414FF; /* Couleur de fond */
+            color: #ffffff; /* Couleur du texte */
+            text-align: center; /* Centrer le contenu */
+            padding: 0px 0; /* Espacement interne */
+            font-size: 0.9em; /* Taille du texte */
+            position: fixed; /* Fixe le footer en bas */
+            bottom: 0; /* Positionnement en bas */
+            left: 0;
+            width: 100%; /* Prend toute la largeur */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+            z-index: 1000; /* Au-dessus des autres éléments */
+        }
 
-    /* Style pour la div container */
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto; /* Centrer la div */
-    }
+        /* Conteneur principal */
+        .unique-footer-container {
+            max-width: 1200px;
+            margin: 0 auto; /* Centrer horizontalement */
+        }
 
-    footer ul {
-        list-style: none;
-        padding: 0;
-        margin: 5px 0;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
+        /* Liens principaux */
+        .unique-footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-    footer ul li a {
-        color: #F0EDECFF;
-        text-decoration: none;
-        font-size: 1.1em;
-        font-weight: bold;
-    }
+        .unique-footer-links li a {
+            color: #F0EDECFF; /* Couleur des liens */
+            text-decoration: none; /* Supprime le soulignement */
+            font-size: 1.1em; /* Taille du texte */
+            font-weight: bold; /* Texte en gras */
+        }
 
-    footer ul li a:hover {
-        text-decoration: underline;
-    }
+        .unique-footer-links li a:hover {
+            text-decoration: underline; /* Soulignement au survol */
+            color: #FFD700; /* Couleur dorée */
+        }
 
-    .social-links {
-        margin: 10px 0;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
+        /* Liens des réseaux sociaux */
+        .unique-social-links {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
 
-    .social-links a {
-        color: #F0EDECFF;
-        font-size: 1em;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
+        .unique-social-links a {
+            color: #fff; /* Couleur du texte des liens */
+            text-decoration: none; /* Supprime le soulignement */
+            transition: color 0.3s ease; /* Transition douce */
+            font-weight: bold; /* Texte en gras */
+        }
 
-    .social-links a:hover {
-        color: #FFD700;
-    }
+        .unique-social-links a:hover {
+            color: #FFD700; /* Couleur dorée au survol */
+        }
 
-    footer p {
-        margin-top: 10px;
-        font-size: 1em;
-        color: #dcdcdc;
-    }
+        /* Texte du bas */
+        .unique-footer-text {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #dcdcdc; /* Couleur légèrement grise */
+        }
+
 </style>
