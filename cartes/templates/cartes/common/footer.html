@@ -1,16 +1,22 @@
 <footer>
     <div class="footer-container">
         <ul>
-            <li><a href="{% url 'index' %}">Acceuil</a></li>
+            <li><a href="{% url 'index' %}">Accueil</a></li>
             <li><a href="{% url 'mentions_legales' %}">Mentions légales</a></li>
             <li><a href="{% url 'privacy_policy' %}">Politique de confidentialité</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
-        <p>&copy; 2024-Tous droits réservés.</p>
+        <!-- Liens des réseaux sociaux -->
+        <div class="social-links">
+            <a href="https://x.com/Mr_Vianss_" target="_blank" aria-label="Twitter">Twitter</a>
+            <a href="https://www.facebook.com/vianney.franckdiomande" target="_blank" aria-label="Facebook">Facebook</a>
+            <a href="https://github.com/franckvianney" target="_blank" aria-label="GitHub">GitHub</a>
+            <a href="https://www.linkedin.com/in/franck-vianney-diomande-864b8193/" target="_blank" aria-label="GitHub">Linkedin</a>
+        </div>
+        <p>&copy; 2024 - Tous droits réservés.</p>
     </div>
 </footer>
 <style>
-    /* Styles pour le footer */
     footer {
         background-color: #EC1414FF; /* Couleur de fond */
         color: #ffffff; /* Couleur du texte */
@@ -29,31 +35,48 @@
         margin: 0 auto; /* Centrer la div */
     }
 
-    /* Style pour la liste des liens */
     footer ul {
         list-style: none;
         padding: 0;
-        margin: 5px 0; /* Réduit les marges */
+        margin: 5px 0;
         display: flex;
-        justify-content: center; /* Aligne les liens au centre */
-        gap: 20px; /* Espacement entre les liens */
+        justify-content: center;
+        gap: 20px;
     }
 
     footer ul li a {
-        color: #F0EDECFF; /* Couleur des liens */
-        text-decoration: none; /* Supprime le soulignement */
-        font-size: 1.1em; /* Augmente la taille des liens */
-        font-weight: bold; /* Met en gras */
+        color: #F0EDECFF;
+        text-decoration: none;
+        font-size: 1.1em;
+        font-weight: bold;
     }
 
     footer ul li a:hover {
-        text-decoration: underline; /* Ajoute un effet au survol */
+        text-decoration: underline;
     }
 
-    /* Style pour le texte en bas */
+    .social-links {
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .social-links a {
+        color: #F0EDECFF;
+        font-size: 1em;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+        color: #FFD700;
+    }
+
     footer p {
-        margin-top: 5px; /* Ajoute un petit espace au-dessus du texte */
-        font-size: 1em; /* Diminue la taille du texte */
-        color: #dcdcdc; /* Couleur légèrement grise pour distinction */
+        margin-top: 10px;
+        font-size: 1em;
+        color: #dcdcdc;
     }
 </style>
