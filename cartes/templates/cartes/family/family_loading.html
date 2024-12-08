@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un moment pour la famille...</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFEBCD, #FF7F50);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 1rem;
+            color: #FF4500;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 1.3em;
+            margin-bottom: 2rem;
+            color: #444;
+        }
+
+        /* Animation de la maison */
+        .house-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            animation: pulse 2s infinite;
+        }
+
+        .house {
+            width: 150px;
+            height: 100px;
+            background: linear-gradient(135deg, #FF6347, #FFA07A);
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .roof {
+            width: 170px;
+            height: 70px;
+            background: #FF4500;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: absolute;
+            top: -70px;
+            left: -10px;
+        }
+
+        .door {
+            width: 40px;
+            height: 60px;
+            background: #8B0000;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 10px;
+            left: 55px;
+        }
+
+        .window {
+            width: 30px;
+            height: 30px;
+            background: #FFFACD;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+        }
+
+        .window.left {
+            left: 20px;
+        }
+
+        .window.right {
+            right: 20px;
+        }
+
+        /* Étoiles scintillantes */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite;
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            width: 300px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+            border-radius: 10px;
+            animation: progress 4s linear forwards;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Message personnalisé */
+        .user-message {
+            margin-top: 2rem;
+            font-size: 1.3em;
+            color: #FF4500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            p { font-size: 1em; }
+            .progress-container { width: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Étoiles en arrière-plan -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <h1>Un moment spécial pour la famille... ❤️</h1>
+
+        <p>
+            Merci de penser à votre famille. Elle est le véritable trésor.
+            <br>
+            Nous préparons un cadeau avec tout notre amour !
+        </p>
+
+        <!-- Maison animée -->
+        <div class="house-box">
+            <div class="roof"></div>
+            <div class="house">
+                <div class="window left"></div>
+                <div class="window right"></div>
+                <div class="door"></div>
+            </div>
+        </div>
+
+        <!-- Barre de progression -->
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Message personnalisé -->
+        <div class="user-message">
+            Votre surprise sera prête dans un instant !
+        </div>
+    </div>
+    {% include 'cartes/common/footer.html' %}
+    <script>
+        // Création des étoiles
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Redirection après le chargement
+        function redirect() {
+            setTimeout(() => {
+                window.location.href = "{% url 'family' %}";
+            }, 4000);
+        }
+
+        // Initialisation
+        window.onload = function() {
+            createStars();
+            redirect();
+        };
+    </script>
+</body>
+</html>

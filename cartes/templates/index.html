@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magie de Noël</title>
+    <style>
+        /* Effet de neige */
+        @keyframes snowfall {
+            0% { transform: translateY(-10px); }
+            100% { transform: translateY(50vh); } /* Descend seulement jusqu'à 50% de la hauteur */
+        }
+
+        /* Police festive */
+        @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
+
+        /* Global styles */
+        body {
+            font-family: 'Mountains of Christmas', cursive;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #2c3e50);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Flocons de neige */
+        .snowflake {
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .snowflake:nth-child(2n) {
+            width: 8px;
+            height: 8px;
+            animation: snowfall 8s linear infinite;
+        }
+
+        .snowflake:nth-child(3n) {
+            width: 12px;
+            height: 12px;
+            animation: snowfall 10s linear infinite;
+        }
+
+        /* Container principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 50px 20px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            z-index: 10; /* Garde le conteneur au-dessus des flocons */
+        }
+
+        /* Titre principal */
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                         0 0 20px rgba(255, 255, 255, 0.3),
+                         0 0 30px rgba(255, 255, 255, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff,
+                             0 0 20px #fff,
+                             0 0 30px #e60073,
+                             0 0 40px #e60073;
+            }
+            to {
+                text-shadow: 0 0 20px #fff,
+                             0 0 30px #ff4da6,
+                             0 0 40px #ff4da6,
+                             0 0 50px #ff4da6;
+            }
+        }
+
+        /* Texte */
+        p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Bouton d'action */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff4500, #ff6347);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-size: 1.5em;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.4);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 99, 71, 0.5);
+        }
+
+        .cta-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-btn:hover:before {
+            left: 100%;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            p { font-size: 1.2em; }
+            .cta-btn { font-size: 1.2em; padding: 15px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Flocons de neige en haut -->
+    <div id="snow"></div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>✨ Bienvenue dans la Magie de Noël ! ✨</h1>
+        <p>Vivez une expérience féerique et plongez dans l'esprit festif. 🎄✨</p>
+        <a href="{% url 'choisir' %}" class="cta-btn">⭐ Découvrez la Magie ⭐</a>
+    </div>
+    <script>
+        // Création des flocons de neige uniquement en haut
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.animationDelay = `${Math.random() * 2}s`;
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Initialisation
+        window.onload = function() {
+            createSnow();
+        };
+    </script>
+</body>
+{% include 'cartes/common/footer.html' %}
+
+</html>

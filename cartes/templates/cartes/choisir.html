@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil - Noël</title>
+    <!-- Import de la police festive -->
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Effet global de neige */
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(15px);
+            }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #2c3e50);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            animation: snowfall linear infinite, sway ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        header {
+            position: absolute;
+            top: 5%;
+            width: 100%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Mountains of Christmas', cursive; /* Utilisation de la police festive */
+            font-size: 3em;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px #8B0000; /* Ombre pour l'effet de profondeur */
+            margin: 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #FFD700, 0 0 20px #FF4500;
+            }
+            to {
+                text-shadow: 0 0 20px #FF6347, 0 0 30px #FFD700;
+            }
+        }
+
+        .card-options {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 0;
+        }
+
+        .card-options li {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            width: 250px;
+            height: 320px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            text-align: center;
+        }
+
+        .card-options li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .card-options li h1 {
+            font-size: 6em;
+            margin: 20px 0 10px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px #8B0000;
+        }
+
+        .card-options li span {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        .card-options li a {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF4500, #FFD700);
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .card-options li a:hover {
+            background: linear-gradient(45deg, #FFD700, #FF6347);
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            .card-options {
+                flex-direction: column;
+            }
+
+            .card-options li {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Neige -->
+    <div id="snow"></div>
+
+    <!-- Titre principal -->
+    <header>
+        <h1>Choisissez une carte magique ✨</h1>
+    </header>
+
+    <!-- Options -->
+    <ul class="card-options">
+        <li>
+            <h1>1</h1>
+            <span>Une carte pour moi</span>
+            <a href="{% url 'welcome' %}">Voir le cadeau</a>
+        </li>
+        <li>
+            <h1>2</h1>
+            <span>Une carte pour mes amis</span>
+            <a href="{% url 'friends_loading' %}">Voir le cadeau</a>
+        </li>
+        <li>
+            <h1>3</h1>
+            <span>Une carte pour ma famille</span>
+            <a href="{% url 'family_loading' %}">Voir le cadeau</a>
+        </li>
+    </ul>
+    <script>
+        // Création des flocons de neige
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.fontSize = `${Math.random() * 2 + 1}em`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.animationDelay = `${Math.random() * 2}s`;
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        window.onload = createSnow;
+    </script>
+</body>
+{% include 'cartes/common/footer.html' %}
+
+</html>

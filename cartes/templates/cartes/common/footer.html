@@ -1,0 +1,58 @@
+<footer>
+    <div class="footer-container">
+        <ul>
+            <li><a href="{% url 'mentions_legales' %}">Mentions légales</a></li>
+            <li><a href="{% url 'privacy_policy' %}">Politique de confidentialité</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <p>&copy; 2024-Tous droits réservés.</p>
+    </div>
+</footer>
+<style>
+    /* Styles pour le footer */
+    footer {
+        background-color: #EC1414FF; /* Couleur de fond */
+        color: #ffffff; /* Couleur du texte */
+        text-align: center; /* Centrer le contenu */
+        padding: 8px 0; /* Réduit l'espacement (hauteur du footer) */
+        font-size: 0.7em; /* Réduit la taille du texte général */
+        position: absolute; /* Position absolue */
+        bottom: 0; /* Aligné en bas */
+        width: 100%; /* S'étend sur toute la largeur */
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Ombre pour plus de style */
+    }
+
+    /* Style pour la div container */
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto; /* Centrer la div */
+    }
+
+    /* Style pour la liste des liens */
+    footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 5px 0; /* Réduit les marges */
+        display: flex;
+        justify-content: center; /* Aligne les liens au centre */
+        gap: 20px; /* Espacement entre les liens */
+    }
+
+    footer ul li a {
+        color: #F0EDECFF; /* Couleur des liens */
+        text-decoration: none; /* Supprime le soulignement */
+        font-size: 1.1em; /* Augmente la taille des liens */
+        font-weight: bold; /* Met en gras */
+    }
+
+    footer ul li a:hover {
+        text-decoration: underline; /* Ajoute un effet au survol */
+    }
+
+    /* Style pour le texte en bas */
+    footer p {
+        margin-top: 5px; /* Ajoute un petit espace au-dessus du texte */
+        font-size: 1em; /* Diminue la taille du texte */
+        color: #dcdcdc; /* Couleur légèrement grise pour distinction */
+    }
+</style>

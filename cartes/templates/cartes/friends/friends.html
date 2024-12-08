@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Carte de Noël</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e63946, #f1faee);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 90%;
+            max-width: 450px;
+            height: auto;
+            background: linear-gradient(135deg, #d42528, #b91a1d);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .card h1 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .card p {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #2196f3, #21cbf3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        .fade-out {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .fade-in {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .background-decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .background-decorations div {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .star {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .firefly {
+            background-color: rgba(255, 223, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
+        }
+
+        .bulb {
+            background-color: rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            to {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="card-container" class="card">
+        <h1 id="card-title">Joyeux Noël, {{ name }} ! 🎄</h1>
+        <p id="random-text">Que cette saison festive soit remplie de joie, d'amour et de magie.</p>
+        <button class="download-button">Télécharger</button>
+        <div class="background-decorations" id="decorations"></div>
+    </div>
+    {% include 'cartes/common/footer.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = [
+                {
+                    title: "À Mes Amis Précieux 🎄",
+                    text: "Merci pour votre présence, votre soutien et vos rires qui illuminent ma vie. Joyeux Noël !",
+                    background: "linear-gradient(135deg, #d42528, #b91a1d)" // Rouge et doré
+                },
+                {
+                    title: "À Mes Amis Fidèles ✨",
+                    text: "Chaque instant avec vous est un cadeau. Que ce Noël vous apporte autant de bonheur que vous m'en donnez.",
+                    background: "linear-gradient(135deg, #4CAF50, #8BC34A)" // Vert sapin
+                },
+                {
+                    title: "Pour Les Amis Qui Comptent 🎆",
+                    text: "Votre amitié est un trésor inestimable. Merci d’être là, aujourd’hui et toujours. Joyeux Noël !",
+                    background: "linear-gradient(135deg, #FF9800, #FFC107)" // Or étincelant
+                },
+                {
+                    title: "Un Noël Pour Vous Mes Amis 🎁",
+                    text: "À vous, qui rendez la vie plus douce et chaque jour spécial, je souhaite un Noël merveilleux !",
+                    background: "linear-gradient(135deg, #3F51B5, #5C6BC0)" // Bleu givré
+                },
+                {
+                    title: "Merci Mes Amis Magiques ✨",
+                    text: "Votre amitié illumine mon cœur. Passez un Noël rempli de rires et de sérénité !",
+                    background: "linear-gradient(135deg, #d42528, #ffffff)" // Rouge et blanc
+                },
+                {
+                    title: "Un Noël Unique Avec Vous 🎄",
+                    text: "Partageons encore plus de souvenirs et de joie en cette période magique !",
+                    background: "linear-gradient(135deg, #4CAF50, #FF9800)" // Vert et or
+                },
+                {
+                    title: "Pour Les Amis Qui Font Tout 🌟",
+                    text: "Vous êtes un pilier dans ma vie. Merci d’être vous. Passez un Noël inoubliable !",
+                    background: "linear-gradient(135deg, #3F51B5, #8BC34A)" // Bleu et vert
+                },
+                {
+                    title: "À Mes Amis, Mes Étoiles ✨",
+                    text: "Merci pour chaque éclat de bonheur que vous apportez dans ma vie. Joyeux Noël !",
+                    background: "linear-gradient(135deg, #FF9800, #d42528)" // Or et rouge
+                },
+                {
+                    title: "Joyeux Noël À Mes Amis 💖",
+                    text: "Votre présence rend ce monde plus lumineux. Merci pour tout. Passez un Noël magique !",
+                    background: "linear-gradient(135deg, #4CAF50, #FFFFFF)" // Vert et blanc
+                },
+                {
+                    title: "Un Noël Pour Les Amis 🎄",
+                    text: "À tous mes amis, je souhaite un Noël rempli de magie, de joie et d'amour.",
+                    background: "linear-gradient(135deg, #3F51B5, #d42528)" // Bleu et rouge
+                },
+                {
+                    title: "Mes Amis, Ma Famille de Cœur 🎄",
+                    text: "Vous êtes ma deuxième famille, et je vous souhaite un Noël aussi incroyable que vous !",
+                    background: "linear-gradient(135deg, #FF5722, #FFC107)" // Rouge et or
+                },
+                {
+                    title: "Pour Les Amis Qui Brillent ✨",
+                    text: "Votre lumière illumine mes jours. Que ce Noël vous comble de bonheur !",
+                    background: "linear-gradient(135deg, #D1C4E9, #9575CD)" // Violet étoilé
+                },
+                {
+                    title: "Un Noël Avec Mes Amis Précieux 😊",
+                    text: "Chaque sourire et chaque souvenir partagé avec vous est un cadeau. Joyeux Noël !",
+                    background: "linear-gradient(135deg, #76FF03, #64DD17)" // Vert vif
+                },
+                {
+                    title: "Pour Les Amis Qui Comptent ✨",
+                    text: "À vous qui êtes toujours là, merci pour votre présence et votre gentillesse. Passez un Noël magique !",
+                    background: "linear-gradient(135deg, #03A9F4, #0288D1)" // Bleu lumineux
+                },
+                {
+                    title: "Merci à Vous Mes Amis ✨",
+                    text: "Votre amitié est un cadeau que je chéris. Passez un Noël enchanté et inoubliable !",
+                    background: "linear-gradient(135deg, #FF7043, #D84315)" // Orange chaleureux
+                }
+            ];
+            const cardContainer = document.getElementById("card-container");
+            const cardTitle = document.getElementById("card-title");
+            const cardText = document.getElementById("random-text");
+            const decorations = document.getElementById("decorations");
+            const downloadButton = document.querySelector(".download-button");
+
+            function randomDecorations() {
+                decorations.innerHTML = ""; // Réinitialiser les décorations
+                const types = ["star", "firefly", "bulb"];
+                const count = Math.floor(Math.random() * 10) + 5;
+
+                for (let i = 0; i < count; i++) {
+                    const decoration = document.createElement("div");
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    decoration.classList.add(type);
+                    decoration.style.top = Math.random() * 100 + "%";
+                    decoration.style.left = Math.random() * 100 + "%";
+                    decorations.appendChild(decoration);
+                }
+            }
+
+            function updateCard() {
+                const randomIndex = Math.floor(Math.random() * cards.length);
+                const randomCard = cards[randomIndex];
+
+                cardContainer.classList.add("fade-out");
+                setTimeout(() => {
+                    cardTitle.innerText = randomCard.title;
+                    cardText.innerText = randomCard.text;
+                    cardContainer.style.background = randomCard.background;
+                    randomDecorations();
+                    cardContainer.classList.remove("fade-out");
+                    cardContainer.classList.add("fade-in");
+                    setTimeout(() => cardContainer.classList.remove("fade-in"), 500);
+                }, 500);
+            }
+
+            updateCard();
+
+            downloadButton.addEventListener("click", function () {
+                downloadButton.classList.add("hide-on-download");
+                html2canvas(cardContainer).then(canvas => {
+                    const link = document.createElement("a");
+                    link.download = "carte_noel.png";
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    downloadButton.classList.remove("hide-on-download");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

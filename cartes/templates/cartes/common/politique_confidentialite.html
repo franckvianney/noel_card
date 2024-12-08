@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de confidentialité</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .privacy-policy {
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            margin: 40px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .privacy-policy h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1a237e;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .privacy-policy p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .privacy-policy ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .privacy-policy ul li {
+            background: #f1f1f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .privacy-policy ul li strong {
+            flex: 0 0 150px;
+            color: #1a237e;
+            text-transform: uppercase;
+        }
+
+        .privacy-policy ul li span {
+            flex: 1;
+        }
+
+        .privacy-policy ul li:hover {
+            background: #e8f0fe;
+        }
+
+        .privacy-policy a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .privacy-policy a:hover {
+            color: #0056b3;
+        }
+
+        footer {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="privacy-policy">
+        <h1>Politique de confidentialité</h1>
+        <p>
+            Nous respectons votre vie privée. Ce site ne collecte ni ne conserve aucune donnée personnelle. Nous veillons à ce que votre expérience reste totalement confidentielle.
+        </p>
+        <ul>
+            <li><strong>Collecte des données :</strong> <span>Aucune donnée personnelle n'est collectée.</span></li>
+            <li><strong>Conservation :</strong> <span>Aucune donnée n'est conservée sur nos serveurs.</span></li>
+            <li><strong>Utilisation :</strong> <span>Nous n’utilisons ni ne partageons vos données avec des tiers, car nous n’en collectons aucune.</span></li>
+        </ul>
+        <p>
+            Pour toute question, contactez-nous à l’adresse suivante : 
+            <a href="mailto:contact@exemple.com">contact@exemple.com</a>.
+        </p>
+    </section>
+    {% include 'cartes/common/footer.html' %}
+</body>
+
+</html>
